@@ -8,9 +8,15 @@ class Profil (models.Model):
     user= models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE,null=True,blank=True)
     userİmg = models.ImageField(("Kullanıcı fotoğrafı"), upload_to=None, height_field=None, width_field=None, max_length=None)
     
+    def __str__(self) -> str:
+        return self.user
+    
     
 class Brand (models.Model):
     title = models.CharField(("Marka"), max_length=50)
+    
+    def __str__(self) -> str:
+        return self.title
     
 
 class Product (models.Model):
@@ -18,15 +24,17 @@ class Product (models.Model):
     user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE,null=True,blank=True)
     title = models.CharField(("Ürün başlığı"), max_length=50)
     productİmg = models.ImageField(("Ürün fotoğrafı"), upload_to=None, height_field=None, width_field=None, max_length=None)
-    productColor = models.CharField(("Renk kodunu gir"), max_length=50)
+    productColor = models.CharField(("Renk gir"), max_length=50)
     productDesct = models.TextField(("Ürün açıklaması"))
-    productSıze = models.CharField(("Ürünün boyutu"), max_length=50)
-    productPrice = models.PositiveIntegerField(("Ürünün fiyatı"),default=0)
-    
-    productGender = models.CharField(("Ürünün Cinsiyeti"), max_length=50, choices=(('kadın',True),('erkek',False)))
-    
+    productPrice = models.PositiveIntegerField(("Ürünün fiyatı"),default=0) 
+    productGender = models.CharField(("Ürünün Cinsiyeti"), max_length=50, choices=(('Kadın','Kadın'),('Erkek','Erkek')))
     productStock = models.PositiveIntegerField(("Ürün stok"))
     liked = models.ManyToManyField(User,related_name=("liked_product"),blank=True)
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    
     
 class Comment (models.Model):
     comment= models.ForeignKey(Product, verbose_name=("Ürün adı"), on_delete=models.CASCADE,null=True,blank=True)
@@ -34,4 +42,7 @@ class Comment (models.Model):
     commentText = models.TextField(("Yorum"))
     commentImg = models.ImageField(("Yorum Görseli"), upload_to=None, height_field=None, width_field=None, max_length=None)
     commentDate = models.DateTimeField((""), auto_now=False, auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return self.comment
     
