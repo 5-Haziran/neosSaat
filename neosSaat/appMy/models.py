@@ -37,10 +37,9 @@ class Product (models.Model):
     
     
 class Comment (models.Model):
-    comment= models.ForeignKey(Product, verbose_name=("Ürün adı"), on_delete=models.CASCADE,null=True,blank=True)
     user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE,null=True,blank=True)
     commentText = models.TextField(("Yorum"))
-    commentImg = models.ImageField(("Yorum Görseli"), upload_to=None, height_field=None, width_field=None, max_length=None)
+    commentImg = models.ImageField(("Yorum Görseli"), upload_to=None, height_field=None, width_field=None, max_length=None,null=True,blank=True)
     commentDate = models.DateTimeField((""), auto_now=False, auto_now_add=True)
     
     def __str__(self) -> str:
