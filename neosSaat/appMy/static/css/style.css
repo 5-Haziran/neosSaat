@@ -215,7 +215,6 @@ img{
     margin: 1rem 0;
 }
 .product-title::after{
-    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
