@@ -20,9 +20,11 @@ def index (request,):
 def brand(request,id):
     
     brand = Product.objects.filter(brand=id)
+    brands = Brand.objects.all()
     
     context={
-        'brand':brand
+        'brand':brand,
+        'brands':brands
     }
     
     return render(request,'brand.html',context)
@@ -30,7 +32,7 @@ def brand(request,id):
 def detail(request,id):
     product = Product.objects.get(id=id)
     brand = Brand.objects.all()
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(product_id=product)
 
     if request.method =='POST':
         comment=request.POST['comment']
