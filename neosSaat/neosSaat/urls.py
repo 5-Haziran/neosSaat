@@ -27,5 +27,6 @@ urlpatterns = [
     path('detay/<id>/',detail,name='detay'),
     path('kategori/<id>/',brand,name='kategori'),
     path('kayıtol/',register,name='kayıtol'),
-    path('girisyap/',loginn,name='girisyap') 
+    path('girisyap/',loginn,name='girisyap'),
+    path('cikisyap/',logoutt,name='çıkış') 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

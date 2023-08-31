@@ -39,11 +39,11 @@ def detail(request,id):
         commentImg = request.FILES.get('commentImg')
         
         if commentImg:
-            com = Comment(commentText=comment,commentImg=commentImg)
+            com = Comment(commentText=comment,commentImg=commentImg,product_id=id)
             com.save()
             
         else:
-            com = Comment(commentText=comment)
+            com = Comment(commentText=comment,product_id=id)
             com.save()
        
     context ={

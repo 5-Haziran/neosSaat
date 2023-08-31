@@ -35,14 +35,14 @@
           </button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Profil</a></li>
-            <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+            <li><a class="dropdown-item" href="/cikisyap/">Çıkış Yap</a></li>
           </ul>
         </div>
 
         {% else %}
         <div class="d-flex ms-5">
-          <button class="me-2 btn btn-outline-dark" type="submit">Kayıt Ol</button>
-          <button class="me-2 btn btn-outline-dark" type="submit">Giriş Yap</button>
+          <a href="/kayıtol/" class="me-2 btn btn-outline-dark" type="submit">Kayıt Ol</a>
+          <a href="/girisyap/" class="me-2 btn btn-outline-dark" type="submit">Giriş Yap</a>
         </div>
         {% endif %}
           
