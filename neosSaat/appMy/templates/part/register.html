@@ -19,6 +19,11 @@
                   </div>
   
                   <p>Kayıt olmak için bilgilerinizi giriniz.</p>
+                  {% if information %}
+                  <div class="alert alert-danger" role="alert">
+                    {{information}}
+                  </div>
+                  {% endif %}
                   <form method="POST">
                     {% csrf_token %}
                     <div class="row">

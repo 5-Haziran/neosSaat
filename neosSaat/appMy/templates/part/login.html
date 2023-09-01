@@ -17,11 +17,15 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                       style="width: 185px;" alt="logo">
                   </div>
+                  {% if information %}
+                  <div class="alert alert-danger" role="alert">
+                    {{information}}
+                  </div>
+                  {% endif %}
   
                   <form method="POST">
                     {% csrf_token %}
                     <p>Giriş Yapmak için bilgilerinizi giriniz.</p>
-  
                     <div class="form-outline mb-4">
                       <input type="text" id="form2Example11" class="form-control"
                         placeholder="Phone number or email address" name="username" />

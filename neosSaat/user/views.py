@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from appMy.templates import *
+from .models import * 
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 
@@ -60,7 +61,12 @@ def loginn(request):
             login(request,user)
             
             return redirect('anasayfa')
+        else:
+            context = {
+                'information':'Girmiş olduğunuz bilgiler hatalıdır. Tekrar deneyiniz.'
+            }
         
+            return render(request,'part/login.html',context)
     
     return render(request,'part/login.html')
 
@@ -69,3 +75,37 @@ def logoutt(request):
     logout(request)
     
     return redirect('anasayfa')
+
+def profil(request):
+    
+    profil = Profil.objects.get(user=request.user)
+    
+    if request.user.is_authenticated:       
+        try:
+            user_profil = Profil.objects.get(user=request.user)
+                
+        except Profil.DoesNotExist:
+            user_profil = Profil(user=request.user)
+            user_profil.save()
+                
+    if request.method =="POST" and 'profil-img-btn' in request.POST:
+        filee = request.FILES.get('profil-img')
+        
+        if filee:
+            user_profil.userİmg =filee
+            user_profil.save()
+            
+            
+    if request.method =="POST" and 'person-btn' in request.POST:
+        
+        user = request.user
+        user.username = request.POST['username']
+        user.first_name = request.POST['firstname']
+        user.last_name = request.POST['lastname']
+        user.email = request.POST['email']
+        
+        user.save()                
+    context ={
+        'profil':profil
+    }
+    return render(request,'profil.html',context)
