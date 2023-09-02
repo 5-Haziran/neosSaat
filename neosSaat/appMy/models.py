@@ -34,5 +34,8 @@ class Comment (models.Model):
     commentImg = models.ImageField(("Yorum Görseli"), upload_to=None, height_field=None, width_field=None, max_length=None,null=True,blank=True)
     commentDate = models.DateTimeField((""), auto_now=False, auto_now_add=True)
     
-
-    
+class Sepet(models.Model):
+    product = models.ForeignKey(Product, verbose_name=("Ürün"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+    adet = models.PositiveIntegerField(("Adet"))
+    allprice = models.FloatField(("Toplam Fiyat"))

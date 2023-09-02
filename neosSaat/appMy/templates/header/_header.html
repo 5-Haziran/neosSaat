@@ -22,8 +22,8 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Ne aramıştınız?" aria-label="Search">
+        <form action="{% url 'anasayfa' %}" class="d-flex" role="search" method="GET">
+          <input name="q" class="form-control me-2" type="search" placeholder="Ne aramıştınız?" aria-label="Search">
           <button class="btn btn-outline-dark" type="submit">Ara</button>
         </form>
         
@@ -45,7 +45,8 @@
           <a href="/girisyap/" class="me-2 btn btn-outline-dark" type="submit">Giriş Yap</a>
         </div>
         {% endif %}
-          
+        <a href="/sepet/" class="me-2 ms-5 btn btn-outline-dark" type="submit"><i class="fa-solid fa-cart-shopping fa-lg"></i>  Sepet</a>
+
 
       </div>
     </div>

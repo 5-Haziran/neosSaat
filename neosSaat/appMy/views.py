@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 from user.views import *
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -9,6 +11,15 @@ def index (request,):
     
     product = Product.objects.all()
     brand = Brand.objects.all()
+    
+    query = request.GET.get('q')
+    if query:
+        product = product.filter(
+            Q(title__icontains=query)|
+            Q(productDesct__icontains=query)|
+            Q(productGender__icontains=query)|
+            Q(brand__title__icontains=query)
+        ).distinct
 
     
     context = {
@@ -54,3 +65,25 @@ def detail(request,id):
     }
     
     return render(request,'detail.html',context)
+
+def urunEkle(request,id):
+    
+    product = Product.objects.get(id=id)
+    user = request.user
+    sepet = Sepet.objects.create(user=user,product=product,adet=1, allprice = product.productPrice)
+    
+    sepet.save()
+    return redirect('sepet')
+    
+def shopping(request):
+    sepet = Sepet.objects.filter(user=request.user)
+    toplam = 0
+    
+    for item in sepet:
+        toplam+=item.objects.productPrice
+    
+    context = {
+        'sepet':sepet,
+        'toplam':toplam
+    }
+    return render(request,'shopping.html',context)
