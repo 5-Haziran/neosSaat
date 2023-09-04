@@ -78,8 +78,6 @@ def logoutt(request):
 
 def profil(request):
     
-    profil = Profil.objects.get(user=request.user)
-    
     if request.user.is_authenticated:       
         try:
             user_profil = Profil.objects.get(user=request.user)
@@ -96,7 +94,7 @@ def profil(request):
             user_profil.save()
             
             
-    if request.method =="POST" and 'person-btn' in request.POST:
+    if request.method == "POST" and 'person-btn' in request.POST:
         
         user = request.user
         user.username = request.POST['username']
@@ -106,6 +104,6 @@ def profil(request):
         
         user.save()                
     context ={
-        'profil':profil
+        'user_profil':user_profil
     }
     return render(request,'profil.html',context)

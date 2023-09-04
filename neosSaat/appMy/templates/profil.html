@@ -13,7 +13,7 @@
                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <img src="{{profil.userİmg.url}}"
+                    <img src="{{user_profil.userİmg.url}}"
                     alt="Avatar" class="img-fluid my-5" style="width: 150px;" />
                     <h5 class="text-black">{{request.user.first_name}} {{request.user.last_name}}</h5>
                     <label class="text-black" for="">Profil Fotoğrafını Değiştir</label>
