@@ -78,9 +78,10 @@
                             </div>
                         </div>
                     </div>
-                    <form action="{% url 'urunEkle' id=product_id %}" method="POST">
-                        <a href="" class="btn btn-success shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Sepete Ekle
-                        </a>
+                    <form action="{% url 'urunekle' id=product.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type ="submit" href="" class="btn btn-success shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Sepete Ekle
+                        </button>
                         <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Favorilere Ekle </a>
                     </form>
                 </div>

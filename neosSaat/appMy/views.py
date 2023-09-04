@@ -66,7 +66,7 @@ def detail(request,id):
     
     return render(request,'detail.html',context)
 
-def urunEkle(request,id):
+def urunekle(request,id):
     
     product = Product.objects.get(id=id)
     user = request.user
@@ -80,10 +80,29 @@ def shopping(request):
     toplam = 0
     
     for item in sepet:
-        toplam+=item.objects.productPrice
+        toplam+=item.product.productPrice * item.adet
     
     context = {
         'sepet':sepet,
         'toplam':toplam
     }
     return render(request,'shopping.html',context)
+
+def ürünSil (request,id):
+    
+    if request.method =='POST':
+        sepet_item = Sepet.objects.get(id=id)
+        sepet_item.delete()
+        
+        return redirect('sepet')
+    
+def ürünGüncelle(request,id):
+    
+    if request.method == 'POST':
+        sepet_item =Sepet.objects.get(id=id)
+        quantity = int(request.POST.get('quantity',1))
+        sepet_item.adet =quantity
+        sepet_item.allprice = sepet_item.product.productPrice * quantity
+        sepet_item.save()
+        
+        return redirect('sepet')
